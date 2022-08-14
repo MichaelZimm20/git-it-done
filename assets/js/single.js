@@ -1,5 +1,6 @@
 // global variables 
 var issueContainerEl = document.querySelector("#issues-container");
+var limitWarningEl = document.querySelector("#limit-warning");
 
 
 // fetch repos for issues 
@@ -11,12 +12,21 @@ var getRepoIssues = function (repo){
             response.json().then(function(data){
                 // pass response data to DOM function
                 displayIssues(data);
+
+
+                // check if api has paginated issues 
+                if (response.headers.get("Link")) {
+                    displayWarning(repo);
+                }
             });
         } else {
             alert("There was a problem with your request!");
         }
     });
 };
+
+
+
 
 // convert fetched data into DOM elements 
 var displayIssues = function(issues){
@@ -61,4 +71,18 @@ var displayIssues = function(issues){
 };
 
 
-getRepoIssues("MichaelZimm20/git-it-done");
+
+
+var displayWarning = function(repo)  {
+    // add text to warning container
+    limitWarningEl.textContent = "To see more than 30 issues, visit";
+    
+    var linkEl = document.createElement("a");
+        linkEl.textContent = "See More Issues on GitHub.com";
+        linkEl.setAttribute("href", "http://github.com/" + repo + "/issues");
+        linkEl.setAttribute("target", "_blank");
+
+        // append to warning container 
+        limitWarningEl.appendChild(linkEl);
+};
+getRepoIssues("facebook/react", "expressjs/express", "angular/angular");
