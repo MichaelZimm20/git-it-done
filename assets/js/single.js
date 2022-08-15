@@ -12,7 +12,7 @@ var getRepoName = function () {
     
     if(repoName) {
         // display repo name on the page
-        repoNameEl.textContent = repoName
+        repoNameEl.textContent = repoName;
 
         getRepoIssues(repoName);
     } else {
@@ -65,8 +65,8 @@ var displayIssues = function(issues){
         // create a link element to take users to the issue on github
         var issuesEl = document.createElement("a");
             issuesEl.classList = "list-item flex-row justify-space-between align-center";
-            issuesEl.setAttribute = ("href", issues[i].html_url);
-            issuesEl.setAttribute = ("target", "_blank");
+            issuesEl.setAttribute("href", issues[i].html_url);
+            issuesEl.setAttribute("target", "_blank");
         
         // create span to hold issue title 
         var titleEl = document.createElement("span");
@@ -112,5 +112,4 @@ var displayWarning = function(repo)  {
 
 
 
-getRepoIssues();
 getRepoName();

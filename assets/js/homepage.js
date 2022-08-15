@@ -57,8 +57,7 @@ var displayRepos = function(repos, searchTerm) {
         }
 
 
-    //clear old content 
-    repoContainerEl.textContent = "";
+   
     repoSearchTerm.textContent = searchTerm;
 
     // loop over repos 
